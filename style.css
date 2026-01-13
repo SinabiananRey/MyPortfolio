@@ -198,6 +198,12 @@ header {
   align-items: center;
 }
 
+.capstone-thumb {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  border-radius: 6px;
+}
 .capstone-thumb img {
   width: 100%;
   height: 100%;
@@ -209,6 +215,46 @@ header {
 }
 .capstone-thumb:hover img,
 .capstone-thumb:focus img { transform: scale(1.03); outline: none; }
+
+
+
+#capstone h4 a { color: #ffdcdc; text-decoration: none; font-weight: 500; }
+
+.view-album {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 18px;
+  flex-wrap: wrap;
+}
+
+.view-album .btn {
+  color: #fff;
+  background: linear-gradient(180deg, rgba(255,43,43,0.16), rgba(255,43,43,0.10));
+  border: 1px solid rgba(255,43,43,0.22);
+  padding: 10px 14px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+}
+
+.view-album .btn:hover,
+.view-album .btn:focus {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 30px rgba(0,0,0,0.6), 0 0 16px rgba(255,43,43,0.1);
+  background: linear-gradient(180deg, rgba(255,43,43,0.22), rgba(255,43,43,0.12));
+  text-decoration: none;
+}
+
+.view-album .btn:focus { outline: 3px solid rgba(255,43,43,0.12); outline-offset: 3px; }
+
+@media (max-width: 480px) {
+  .view-album { gap: 10px; }
+  .view-album .btn { padding: 9px 12px; }
+}
 
 .lightbox {
   position: fixed;

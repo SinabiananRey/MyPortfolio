@@ -73,6 +73,8 @@
             <div class="project-item"><a href="https://github.com/taloy2/IT21C-PROJECTS/tree/main/src/projects" target="_blank">Projects</a></div>
             <div class="project-item"><a href="https://github.com/taloy2/IT21C-PROJECTS/tree/main/src/students" target="_blank">Students</a></div>
             <div class="project-item"><a href="https://github.com/taloy2/bubblesort" target="_blank">Bubblesort</a></div>
+            <div class="project-item"><a href="https://jam-piodos.github.io/landlord-ex2.0/index.html" target="_blank">Capstone Project</a></div>
+           
         </div>
     </section>
 
@@ -95,7 +97,6 @@
     </section>
 
    <section id="capstone" class="container grid-section">
-  <section id="capstone">
   <h3>CAPSTONE JOURNEY</h3>
 
   <div class="repo-grid capstone-grid">
@@ -112,19 +113,18 @@
     </a>
   </div>
 
-  <h4>
-    <a href="https://drive.google.com/drive/folders/1SgOulcz0yZHKTETO7X5NUO8Y_TgqZDrv" 
+  <div class="view-album">
+    <a class="btn btn-album" href="https://drive.google.com/drive/folders/1SgOulcz0yZHKTETO7X5NUO8Y_TgqZDrv" 
        target="_blank" 
-       rel="noopener noreferrer">
-      <h4 style="color: white;">View Album</h4>
-    </a>
-  </h4>
+       rel="noopener noreferrer">View Album</a>
+  </div>
+
 
   <div id="lightbox" class="lightbox" aria-hidden="true">
     <button class="lb-close" aria-label="Close preview">&times;</button>
-    <img src="" alt="Capstone full preview">
+    <img src="" alt="Capstone full preview" />
   </div>
-</section>
+</section> 
 
 </main>
 
@@ -154,6 +154,36 @@
     }
   });
 </script>
-</body>
+
+<script>
+  // Capstone lightbox behavior
+  (function(){
+    const thumbs = document.querySelectorAll('.capstone-thumb');
+    const lightbox = document.getElementById('lightbox');
+    const lbImg = lightbox.querySelector('img');
+    const lbClose = lightbox.querySelector('.lb-close');
+
+    thumbs.forEach(a => {
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        const large = a.dataset.large || a.querySelector('img').src;
+        lbImg.src = large;
+        lightbox.setAttribute('aria-hidden', 'false');
+        lightbox.classList.add('open');
+      });
+    });
+
+    function closeLightbox(){
+      lightbox.classList.remove('open');
+      lightbox.setAttribute('aria-hidden', 'true');
+      lbImg.src = '';
+    }
+
+    lbClose.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+    window.addEventListener('keydown', e => { if (e.key === 'Escape' && lightbox.classList.contains('open')) closeLightbox(); });
+  })();
+</script>
+</body> 
 
 </html>
