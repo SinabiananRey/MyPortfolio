@@ -13,23 +13,21 @@ body {
     position: relative;
     font-family: 'Rubik', 'Rubik';
     color: #e6e6e6;
-    /* keep a gradient fallback on the body; the image is rendered and blurred in ::after */
     background:
         radial-gradient(ellipse at bottom, rgba(11,11,13,0.7), rgba(6,6,6,0.95));
     overflow-x: hidden;
 }
 
-/* Slightly blur the page background image only */
 body::after {
-    content: '';
+    content: ''; 
     position: fixed;
     inset: 0;
     background:
         url('stBG.gif') center / cover fixed no-repeat;
     filter: blur(6px);
-    transform: scale(1.03); /* prevents visible edges from blur */
+    transform: scale(1.03);
     pointer-events: none;
-    z-index: -2; /* sit behind the content */
+    z-index: -2; 
 } 
 
 body::before {
@@ -45,7 +43,7 @@ body::before {
         );
     pointer-events: none;
     mix-blend-mode: overlay;
-    z-index: -1; /* ensure overlay sits above the blurred background but below page content */
+    z-index: -1;
 }
 
 header {
