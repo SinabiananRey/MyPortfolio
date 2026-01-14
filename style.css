@@ -47,10 +47,29 @@ body::before {
 }
 
 header {
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    padding: 20px 0;
+    position: fixed;
+    top: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1050;
+    padding: 6px 10px;
+    background: rgba(0,0,0,0.45);
+    border-radius: 999px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.6), 0 0 18px rgba(255,43,43,0.04);
+    backdrop-filter: blur(6px);
+}
+
+/* Make nav items keyboard-friendly */
+.nav a:focus {
+    outline: 3px solid rgba(255,43,43,0.12);
+    outline-offset: 3px;
+    border-radius: 6px;
+}
+
+@media (max-width: 480px) {
+    header { top: 12px; padding: 6px; }
+    .nav ul { gap: 10px; }
+    .nav a { width: 40px; height: 40px; font-size: 18px; }
 }
 
 .nav ul {
