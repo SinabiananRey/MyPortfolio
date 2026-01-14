@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Monoton&family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Nosifer&family=Cinzel+Decorative&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
 
@@ -157,7 +158,6 @@
 </script>
 
 <script>
-  // Capstone lightbox behavior
   (function(){
     const thumbs = document.querySelectorAll('.capstone-thumb');
     const lightbox = document.getElementById('lightbox');
@@ -184,6 +184,73 @@
     lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
     window.addEventListener('keydown', e => { if (e.key === 'Escape' && lightbox.classList.contains('open')) closeLightbox(); });
   })();
+</script>
+
+<script>
+(function(){
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const palette = ['#ff3b3b','#ffd93d','#2ad8ff','#76ff7a','#c16bff','#ff8a3d','#ff6b9c','#8be4c0'];
+  const boxes = Array.from(document.querySelectorAll('.project-item, .pro, .person-card, .capstone-thumb'));
+  if(!boxes.length) return;
+
+  boxes.forEach((el, idx) => {
+    const color = palette[idx % palette.length];
+    if(!el.style.getPropertyValue('--glow')) el.style.setProperty('--glow', color);
+
+    el.classList.add('always-glow');
+
+    if(!prefersReduced){
+      el.addEventListener('focus', () => el.classList.add('st-pulse'));
+      el.addEventListener('blur', () => el.classList.remove('st-pulse'));
+    }
+
+    const base = 300 + Math.round(Math.random() * 900);
+    el.style.setProperty('--malf-duration', `${base}ms`);
+  });
+
+  if(!prefersReduced){
+    function pickRandomBoxes(n){
+      const copy = boxes.slice();
+      const out = [];
+      for(let i=0;i<Math.min(n, copy.length);i++){
+        const idx = Math.floor(Math.random()*copy.length);
+        out.push(copy.splice(idx,1)[0]);
+      }
+      return out;
+    }
+
+    const GROUP_MIN = 2;
+    const GROUP_MAX = 3;
+    function pickGroupSize(){ return Math.floor(Math.random()*(GROUP_MAX - GROUP_MIN + 1)) + GROUP_MIN; }
+
+    function triggerQuick(){
+      const count = pickGroupSize();
+      const els = pickRandomBoxes(count);
+      els.forEach(el => {
+        el.classList.remove('malfunction');
+        void el.offsetWidth;
+        el.classList.add('malfunction');
+      });
+      setTimeout(()=> els.forEach(el => el.classList.remove('malfunction')), 300 + Math.random()*900);
+    }
+
+    function triggerLong(){
+      const count = pickGroupSize();
+      const els = pickRandomBoxes(count);
+      els.forEach(el => {
+        el.classList.remove('malfunction-long');
+        void el.offsetWidth;
+        el.classList.add('malfunction-long');
+      });
+      setTimeout(()=> els.forEach(el => el.classList.remove('malfunction-long')), 900 + Math.random()*2200);
+    }
+
+    setInterval(triggerQuick, 700 + Math.random() * 1000);
+    setInterval(triggerLong, 6000 + Math.random() * 8000);
+  }
+
+})();
 </script>
 </body> 
 
